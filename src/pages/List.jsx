@@ -1,1 +1,1 @@
-#src/pages/Index.jsx
+#src/pages/List.jsx
