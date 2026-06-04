@@ -1,1 +1,55 @@
 /*src/styles/app.css*/ 
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;900&family=Share+Tech&display=swap');
+
+/*CSS Variables*/
+:root {
+  --color-bg-primary: #0a0e1a;
+  --color-bg-secondary: #0f1628;
+  --color-bg-card: #111c35;
+  --color-accent-blue: #00d4ff;
+  --color-accent-yellow: #f5c400;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #7ab3cc;
+  --border-glow: 0 0 8px #00d4ff, 0 0 2px #00d4ff;
+  --font-heading: 'Exo 2', sans-serif;
+  --font-body: 'Share Tech', sans-serif;
+  --radius: 8px;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+}
+
+/*Reset*/
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*Base*/
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+a {
+  color: var(--color-accent-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent-yellow);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
