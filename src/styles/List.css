@@ -1,1 +1,96 @@
 /*src/styles/List.css*/
+
+/*Base*/
+.list {
+  padding-top: 90px;
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/*Topbar*/
+.list-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.list-results {
+  font-family: var(--font-heading);
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.list-filter-btn {
+  background-color: transparent;
+  border: 2px solid var(--color-accent-blue);
+  color: var(--color-accent-blue);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.list-filter-btn:hover {
+  background-color: var(--color-accent-blue);
+  color: var(--color-bg-primary);
+}
+
+/*Grid*/
+.list-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-md);
+  justify-items: center;
+}
+
+/*Pagination*/
+.list-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-heading);
+}
+
+.list-pagination button {
+  background-color: transparent;
+  border: 2px solid var(--color-accent-blue);
+  color: var(--color-accent-blue);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.list-pagination button:hover:not(:disabled) {
+  background-color: var(--color-accent-blue);
+  color: var(--color-bg-primary);
+}
+
+.list-pagination button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/*Tablet*/
+@media (max-width: 768px) {
+  .list-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/*Mobile*/
+@media (max-width: 480px) {
+  .list-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

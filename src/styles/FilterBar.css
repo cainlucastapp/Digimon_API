@@ -1,1 +1,150 @@
 /*src/styles/FilterBar.css*/
+
+/*Overlay*/
+.filterbar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+}
+
+.filterbar-overlay.open {
+  display: block;
+}
+
+/*Panel*/
+.filterbar {
+  position: fixed;
+  top: 0;
+  left: -320px;
+  width: 320px;
+  height: 100vh;
+  background-color: var(--color-bg-secondary);
+  border-right: 2px solid var(--color-accent-blue);
+  box-shadow: var(--border-glow);
+  z-index: 1002;
+  transition: left 0.3s ease;
+  overflow-y: auto;
+  padding: var(--spacing-lg);
+}
+
+.filterbar.open {
+  left: 0;
+}
+
+/*Header*/
+.filterbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-accent-blue);
+  padding-bottom: var(--spacing-md);
+}
+
+.filterbar-header h3 {
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.filterbar-close {
+  background: none;
+  border: none;
+  color: var(--color-accent-blue);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.filterbar-close:hover {
+  color: var(--color-accent-yellow);
+}
+
+/*Section*/
+.filterbar-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.filterbar-section h4 {
+  font-family: var(--font-heading);
+  color: var(--color-accent-yellow);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-sm);
+}
+
+/*Options*/
+.filterbar-option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 6px 0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.filterbar-option:hover {
+  color: var(--color-accent-blue);
+}
+
+.filterbar-option input {
+  accent-color: var(--color-accent-blue);
+}
+
+/*Actions*/
+.filterbar-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.filterbar-clear {
+  flex: 1;
+  background: transparent;
+  border: 2px solid var(--color-text-secondary);
+  color: var(--color-text-secondary);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 8px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterbar-clear:hover {
+  border-color: var(--color-accent-yellow);
+  color: var(--color-accent-yellow);
+}
+
+.filterbar-apply {
+  flex: 1;
+  background: var(--color-accent-blue);
+  border: 2px solid var(--color-accent-blue);
+  color: var(--color-bg-primary);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 8px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterbar-apply:hover {
+  background: var(--color-accent-yellow);
+  border-color: var(--color-accent-yellow);
+}
+
+/*Mobile*/
+@media (max-width: 480px) {
+  .filterbar {
+    width: 100%;
+    left: -100%;
+  }
+}
