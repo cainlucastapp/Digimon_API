@@ -12,12 +12,12 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="navbar__logo" onClick={closeMenu}>
+      <Link to="/" className="navbar-logo" onClick={closeMenu}>
         <img src={digimonLogo} alt="Digimon Logo" />
       </Link>
 
       <button
-        className={`navbar__hamburger ${menuOpen ? "open" : ""}`}
+        className={`navbar-hamburger ${menuOpen ? "open" : ""}`}
         onClick={() => setMenuOpen(!menuOpen)}
         aria-label="Toggle menu"
       >
@@ -26,7 +26,7 @@ function Navbar() {
         <span></span>
       </button>
 
-      <ul className={`navbar__links ${menuOpen ? "open" : ""}`}>
+      <ul className={`navbar-links ${menuOpen ? "open" : ""}`}>
         <li><Link to="/" onClick={closeMenu}>Home</Link></li>
         <li><Link to="/digimon" onClick={closeMenu}>Digimons</Link></li>
       </ul>
