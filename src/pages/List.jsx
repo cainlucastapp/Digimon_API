@@ -1,6 +1,7 @@
 // src/pages/List.jsx
 
 import { useState, useCallback } from "react"
+import { useParams, useNavigate } from "react-router-dom"
 import useFetch from "../hooks/useFetch"
 import { getDigimonList } from "../services/digimonApi"
 import DigimonCard from "../components/DigimonCard"
@@ -8,15 +9,35 @@ import FilterBar from "../components/FilterBar"
 import "../styles/List.css"
 
 function List() {
-  const [filters, setFilters] = useState({ page: 0, pageSize: 20 })
+  const { page: pageParam } = useParams()
+  const navigate = useNavigate()
+  const page = parseInt(pageParam || "1", 10)
+  const apiPage = page - 1
+
+  const [filters, setFilters] = useState({})
   const [filterOpen, setFilterOpen] = useState(false)
 
-  const fetchList = useCallback(() => getDigimonList(filters), [filters])
-  const { data, loading, error } = useFetch(fetchList, [filters])
+  const fetchList = useCallback(
+    () => getDigimonList({ ...filters, page: apiPage, pageSize: 18 }),
+    [filters, page]
+  )
+  const { data, loading, error } = useFetch(fetchList, [filters, page])
 
   const handleFilterChange = (newFilters) => {
-    setFilters({ ...newFilters, page: 0, pageSize: 20 })
+    setFilters(newFilters)
     setFilterOpen(false)
+    navigate(`/digimon/page/1`, { replace: true })
+    window.scrollTo(0, 0)
+  }
+
+  const handlePrev = () => {
+    navigate(`/digimon/page/${page - 1}`)
+    window.scrollTo(0, 0)
+  }
+
+  const handleNext = () => {
+    navigate(`/digimon/page/${page + 1}`)
+    window.scrollTo(0, 0)
   }
 
   if (loading) return <div>Loading...</div>
@@ -44,19 +65,9 @@ function List() {
       </div>
 
       <div className="list-pagination">
-        <button
-          disabled={data?.pageable.currentPage === 0}
-          onClick={() => setFilters({ ...filters, page: filters.page - 1 })}
-        >
-          Prev
-        </button>
-        <span>{data?.pageable.currentPage + 1} / {data?.pageable.totalPages}</span>
-        <button
-          disabled={data?.pageable.currentPage + 1 === data?.pageable.totalPages}
-          onClick={() => setFilters({ ...filters, page: filters.page + 1 })}
-        >
-          Next
-        </button>
+        <button disabled={page === 1} onClick={handlePrev}>Prev</button>
+        <span>{page} / {data?.pageable.totalPages}</span>
+        <button disabled={page === data?.pageable.totalPages} onClick={handleNext}>Next</button>
       </div>
     </div>
   )

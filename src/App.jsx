@@ -1,6 +1,6 @@
 // src/App.jsx
 
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Hero from "./pages/Hero"
 import List from "./pages/List"
@@ -12,7 +12,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Hero />} />
-        <Route path="/digimon" element={<List />} />
+        <Route path="/digimon" element={<Navigate to="/digimon/page/1" replace />} />
+        <Route path="/digimon/page/:page" element={<List />} />
         <Route path="/digimon/:id" element={<ShowDigimon />} />
       </Routes>
     </BrowserRouter>
