@@ -1,1 +1,79 @@
 /*src/styles/DigimonCard.css*/
+
+/*Base*/
+.card {
+  background-color: var(--color-bg-card);
+  border: 2px solid var(--color-accent-blue);
+  box-shadow: var(--border-glow);
+  border-radius: 12px;
+  width: 280px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+  font-family: var(--font-heading);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 16px #00d4ff, 0 0 4px #00d4ff;
+}
+
+/*Header*/
+.card-header {
+  background-color: var(--color-accent-yellow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+}
+
+.card-name {
+  color: #0a0e1a;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px;
+}
+
+.card-id {
+  color: #0a0e1a;
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+/*Image*/
+.card-image-container {
+  background: linear-gradient(180deg, #0f1e3d 0%, #0a0e1a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  height: 180px;
+}
+
+.card-image {
+  max-height: 150px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.4));
+}
+
+/*Mobile*/
+@media (max-width: 480px) {
+  .card {
+    width: 150px;
+  }
+
+  .card-image-container {
+    height: 140px;
+  }
+
+  .card-image {
+    max-height: 110px;
+  }
+}
