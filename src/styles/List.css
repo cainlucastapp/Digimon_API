@@ -43,9 +43,9 @@
 /*Grid*/
 .list-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 250px));
   gap: var(--spacing-md);
-  justify-items: center;
+  justify-content: center;
 }
 
 /*Pagination*/
@@ -84,12 +84,17 @@
 /*Tablet*/
 @media (max-width: 768px) {
   .list-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 250px));
   }
 }
 
 /*Mobile*/
 @media (max-width: 480px) {
+  .list {
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+  }
+
   .list-grid {
     grid-template-columns: repeat(2, 1fr);
   }

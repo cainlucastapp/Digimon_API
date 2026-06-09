@@ -12,7 +12,6 @@ function DigimonCard({ digimon }) {
     <div className="card" onClick={handleClick}>
       <div className="card-header">
         <span className="card-name">{digimon.name}</span>
-        <span className="card-id">#{digimon.id}</span>
       </div>
       <div className="card-image-container">
         <img
@@ -20,6 +19,9 @@ function DigimonCard({ digimon }) {
           alt={digimon.name}
           className="card-image"
         />
+      </div>
+      <div className="card-footer">
+        <span className="card-id">#{digimon.id}</span>
       </div>
     </div>
   )
