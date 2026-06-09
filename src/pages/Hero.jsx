@@ -2,24 +2,28 @@
 
 import { useCallback } from "react"
 import useFetch from "../hooks/useFetch"
-import { getDigimonList } from "../services/digimonApi"
+import { getRandomDigimon } from "../services/digimonApi"
 import DigimonCard from "../components/DigimonCard"
 import "../styles/Hero.css"
 
 function Hero() {
-  const randomPage = Math.floor(Math.random() * 74)
-  const fetchGrid = useCallback(() => getDigimonList({ page: randomPage, pageSize: 9 }), [])
-  const { data, loading, error } = useFetch(fetchGrid, [])
+  const fetchRandom = useCallback(() => getRandomDigimon(), [])
+  const { data, loading, error } = useFetch(fetchRandom, [])
 
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>Error: {error}</div>
+  if (loading) return <div className="hero-loading">Loading...</div>
+  if (error) return <div className="hero-error">Error: {error}</div>
 
   return (
     <div className="hero">
-      <div className="hero-grid">
-        {data?.content.map((digimon) => (
-          <DigimonCard key={digimon.id} digimon={digimon} />
-        ))}
+      <div className="hero-text">
+        <h1 className="hero-title">Welcome to Digi Fight</h1>
+        <p className="hero-body">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sapien eget nunc efficitur commodo. Sed at ligula a enim efficitur tincidunt. Curabitur ac odio id nisl convallis fermentum. 
+        </p>
+        <a href="/digimon" className="hero-btn">Browse All Digimon</a>
+      </div>
+      <div className="hero-card">
+        {data && <DigimonCard digimon={data} />}
       </div>
     </div>
   )
