@@ -1,1 +1,56 @@
 /*src/styles/ShowDigimon.css*/
+
+/*Base*/
+.show {
+  padding-top: 90px;
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/*Main*/
+.show-main {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+/*Left*/
+.show-left {
+  flex: 0 0 250px;
+}
+
+/*Right*/
+.show-right {
+  flex: 1;
+}
+
+/*Card Overrides*/
+.card {
+    cursor: initial;
+}
+
+.card:hover {
+  transform: translateY(0px);
+  box-shadow: var(--border-glow);
+}
+
+/*Tablet*/
+@media (max-width: 768px) {
+  .show-main {
+    flex-direction: column;
+  }
+
+  .show-left {
+    flex: 0 0 auto;
+  }
+}
+
+/*Mobile*/
+@media (max-width: 480px) {
+  .show {
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+  }
+}

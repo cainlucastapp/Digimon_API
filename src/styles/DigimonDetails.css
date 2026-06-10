@@ -1,0 +1,58 @@
+/*src/styles/DigimonDetails.css*/
+
+/*Base*/
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/*Badges*/
+.details-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.details-badge {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--radius);
+  text-transform: uppercase;
+}
+
+.details-badge-level {
+  background-color: var(--color-accent-blue);
+  color: var(--color-bg-primary);
+}
+
+.details-badge-attribute {
+  background-color: var(--color-accent-yellow);
+  color: var(--color-bg-primary);
+}
+
+.details-badge-type {
+  border: 2px solid var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+
+.details-field-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+/*Description*/
+.details-description {
+  font-family: var(--font-body);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  font-size: 1rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-accent-blue);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+}
