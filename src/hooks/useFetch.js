@@ -8,6 +8,12 @@ const useFetch = (fetchFn, deps = []) => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    if (typeof fetchFn !== "function") {
+      setError("No fetch function provided")
+      setLoading(false)
+      return
+    }
+
     let cancelled = false
     setLoading(true)
     setError(null)
@@ -21,7 +27,7 @@ const useFetch = (fetchFn, deps = []) => {
       })
       .catch((err) => {
         if (!cancelled) {
-          setError(err.message)
+          setError(err instanceof Error ? err.message : "An unexpected error occurred")
           setLoading(false)
         }
       })
