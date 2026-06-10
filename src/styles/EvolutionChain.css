@@ -96,7 +96,6 @@
 }
 
 /*Mobile*/
-/*Mobile*/
 @media (max-width: 768px) {
   .evo {
     grid-template-columns: 1fr;
