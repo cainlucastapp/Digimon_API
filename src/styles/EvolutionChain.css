@@ -1,1 +1,119 @@
 /*src/styles/EvolutionChain.css*/
+
+/*Base*/
+.evo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+/*Section*/
+.evo-section {
+  background-color: var(--color-bg-card);
+  border: 2px solid var(--color-accent-blue);
+  box-shadow: var(--border-glow);
+  border-radius: 12px;
+  padding: var(--spacing-md);
+}
+
+.evo-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent-yellow);
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-md);
+}
+
+.evo-empty {
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+
+/*Row*/
+.evo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+/*Card*/
+.evo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  width: 100px;
+  transition: transform 0.2s;
+}
+
+.evo-card:hover {
+  transform: translateY(-4px);
+}
+
+/*Image*/
+.evo-image-container {
+  background-color: #ffffff;
+  border: 2px solid var(--color-accent-blue);
+  border-radius: 8px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-sm);
+  transition: box-shadow 0.2s;
+}
+
+.evo-card:hover .evo-image-container {
+  box-shadow: var(--border-glow);
+}
+
+.evo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/*Name*/
+.evo-name {
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+  font-size: 0.7rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/*Condition*/
+.evo-condition {
+  font-family: var(--font-body);
+  color: var(--color-text-secondary);
+  font-size: 0.65rem;
+  text-align: center;
+  margin-top: 2px;
+}
+
+/*Mobile*/
+/*Mobile*/
+@media (max-width: 768px) {
+  .evo {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .evo-row {
+    gap: var(--spacing-sm);
+  }
+
+  .evo-card {
+    width: 80px;
+  }
+
+  .evo-image-container {
+    width: 64px;
+    height: 64px;
+  }
+}
