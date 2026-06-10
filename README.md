@@ -3,11 +3,8 @@ TODO
 *Required
 
 Add Search
-    
-Tighten API validations
-    Missing info
-    Missing Image
-    API Down
+
+Issue: Navigation issue hitting the back button to a filter list from the show page.
 
 
 *Extras
