@@ -27,11 +27,11 @@
 }
 
 /*Card Overrides*/
-.card {
-    cursor: initial;
+.show-left .card {
+  cursor: initial;
 }
 
-.card:hover {
+.show-left .card:hover {
   transform: translateY(0px);
   box-shadow: var(--border-glow);
 }

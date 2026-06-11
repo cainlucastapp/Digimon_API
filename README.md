@@ -3,8 +3,8 @@ TODO
 *Required
 Footer with dislaimer: Digimon and other media relating to the franchise are registered trademarks of Bandai.
 
-*Issues
-Card CSS Error on hero page (Check Card overides in list.css?).
+Replace hero Lorem ipsum
+
 
 
 *Extras
