@@ -1,45 +1,68 @@
 // src/pages/List.jsx
 
 import { useState, useCallback } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import useFetch from "../hooks/useFetch"
 import { getDigimonList } from "../services/digimonApi"
 import DigimonCard from "../components/DigimonCard"
 import FilterBar from "../components/FilterBar"
+import SearchBar from "../components/SearchBar"
 import "../styles/List.css"
 
 function List() {
-  const { page: pageParam } = useParams()
-  const navigate = useNavigate()
-  const page = parseInt(pageParam || "1", 10)
-  const apiPage = page - 1
 
-  const [filters, setFilters] = useState({})
+  // URL Search Params
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  // Filter Panel State
   const [filterOpen, setFilterOpen] = useState(false)
 
-  const fetchList = useCallback(
-    () => getDigimonList({ ...filters, page: apiPage, pageSize: 18 }),
-    [filters, page]
-  )
-  const { data, loading, error } = useFetch(fetchList, [filters, page])
+  // Read Params from URL
+  const page = parseInt(searchParams.get("page") || "0")
+  const attribute = searchParams.get("attribute") || ""
+  const level = searchParams.get("level") || ""
+  const name = searchParams.get("name") || ""
 
-  const handleFilterChange = (newFilters) => {
-    setFilters(newFilters)
-    setFilterOpen(false)
-    navigate(`/digimon/page/1`, { replace: true })
-    window.scrollTo(0, 0)
+  // Fetch Digimon List
+  const fetchList = useCallback(
+    () => getDigimonList({ page, pageSize: 18, attribute, level, name }),
+    [page, attribute, level, name]
+  )
+  const { data, loading, error } = useFetch(fetchList, [page, attribute, level, name])
+
+  // Handle Search Submit
+  const handleSearch = (value) => {
+    setSearchParams({
+      page: 0,
+      ...(value && { name: value }),
+      ...(attribute && { attribute }),
+      ...(level && { level }),
+    })
   }
 
+  // Handle Filter Change
+  const handleFilterChange = (newFilters) => {
+    setSearchParams({
+      page: 0,
+      ...(name && { name }),
+      ...(newFilters.attribute && { attribute: newFilters.attribute }),
+      ...(newFilters.level && { level: newFilters.level }),
+    })
+    setFilterOpen(false)
+  }
+
+  // Handle Pagination
   const handlePrev = () => {
-    navigate(`/digimon/page/${page - 1}`)
+    setSearchParams({ page: page - 1, attribute, level, name })
     window.scrollTo(0, 0)
   }
 
   const handleNext = () => {
-    navigate(`/digimon/page/${page + 1}`)
+    setSearchParams({ page: page + 1, attribute, level, name })
     window.scrollTo(0, 0)
   }
 
+  // Loading and Error States
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error: {error}</div>
 
@@ -47,6 +70,7 @@ function List() {
     <div className="list">
       <div className="list-topbar">
         <span className="list-results">{data?.pageable.totalElements} Results</span>
+        <SearchBar defaultValue={name} onSearch={handleSearch} />
         <button className="list-filter-btn" onClick={() => setFilterOpen(!filterOpen)}>
           Filter
         </button>
@@ -59,16 +83,23 @@ function List() {
       />
 
       <div className="list-grid">
-        {data?.content.map((digimon) => (
-          <DigimonCard key={digimon.id} digimon={digimon} />
-        ))}
+        {!data?.content || data.content.length === 0 ? (
+          <div className="list-no-results">No Digimon found. Try a different search or filter.</div>
+        ) : (
+          data.content.map((digimon) => (
+            <DigimonCard key={digimon.id} digimon={digimon} />
+          ))
+        )}
       </div>
 
-      <div className="list-pagination">
-        <button disabled={page === 1} onClick={handlePrev}>Prev</button>
-        <span>{page} / {data?.pageable.totalPages}</span>
-        <button disabled={page === data?.pageable.totalPages} onClick={handleNext}>Next</button>
-      </div>
+      {data?.pageable.totalElements > 0 && (
+        <div className="list-pagination">
+          <button disabled={page === 0} onClick={handlePrev}>Prev</button>
+          <span>{page + 1} / {data?.pageable.totalPages}</span>
+          <button disabled={page + 1 >= data?.pageable.totalPages} onClick={handleNext}>Next</button>
+        </div>
+      )} 
+
     </div>
   )
 }

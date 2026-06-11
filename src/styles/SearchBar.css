@@ -1,0 +1,55 @@
+/*src/styles/SearchBar.css*/
+
+/*Base*/
+.searchbar {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex: 1;
+}
+
+/*Input*/
+.searchbar-input {
+  flex: 1;
+  background-color: var(--color-bg-card);
+  border: 2px solid var(--color-accent-blue);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 6px 16px;
+  border-radius: var(--radius);
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+
+.searchbar-input:focus {
+  box-shadow: var(--border-glow);
+}
+
+.searchbar-input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+/*Button*/
+.searchbar-btn {
+  background-color: transparent;
+  border: 2px solid var(--color-accent-blue);
+  color: var(--color-accent-blue);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.searchbar-btn:hover {
+  background-color: var(--color-accent-blue);
+  color: var(--color-bg-primary);
+}
+
+/*Mobile*/
+@media (max-width: 480px) {
+  .searchbar {
+    flex: 1 1 auto;
+  }
+}
