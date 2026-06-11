@@ -1,49 +1,60 @@
 // src/services/digimonApi.js
 
-const BASE_URL = "https://digi-api.com/api/v1";
+const BASE_URL = "https://digi-api.com/api/v1"
 
-// Build Query
+/*Build Query*/
 const buildQuery = (params) => {
-  const query = new URLSearchParams();
+  const query = new URLSearchParams()
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== "") {
-      query.append(key, value);
+      query.append(key, value)
     }
-  });
-  return query.toString();
-};
+  })
+  return query.toString()
+}
 
-// Fetch All Pages
+/*Safe Fetch*/
+const safeFetch = async (url) => {
+  let res
+  try {
+    res = await fetch(url)
+  } catch (err) {
+    throw new Error("Network error — please check your connection and try again")
+  }
+  return res
+}
+
+/*Fetch All Pages*/
 const fetchAllPages = async (endpoint) => {
-  let page = 0;
-  let allFields = [];
-  let hasMore = true;
-  const MAX_PAGES = 10;
+  let page = 0
+  let allFields = []
+  let hasMore = true
+  const MAX_PAGES = 10
 
   while (hasMore && page < MAX_PAGES) {
-    const res = await fetch(`${BASE_URL}/${endpoint}?page=${page}`);
-    if (!res.ok) throw new Error(`Failed to fetch ${endpoint} page ${page}`);
-    
-    const data = await res.json();
-    
+    const res = await safeFetch(`${BASE_URL}/${endpoint}?page=${page}`)
+    if (!res.ok) throw new Error(`Failed to fetch ${endpoint} page ${page}`)
+
+    const data = await res.json()
+
     if (!data.content || !Array.isArray(data.content.fields)) {
-      throw new Error(`Unexpected response shape from ${endpoint}`);
+      throw new Error(`Unexpected response shape from ${endpoint}`)
     }
 
-    allFields = [...allFields, ...data.content.fields];
-    hasMore = !!data.pageable?.nextPage;
-    page++;
+    allFields = [...allFields, ...data.content.fields]
+    hasMore = !!data.pageable?.nextPage
+    page++
   }
 
-  return allFields;
-};
+  return allFields
+}
 
-//Get Digimon List
+/*Get Digimon List*/
 export const getDigimonList = async (params = {}) => {
-  const query = buildQuery(params);
-  const res = await fetch(`${BASE_URL}/digimon?${query}`);
-  if (!res.ok) throw new Error("Failed to fetch Digimon list");
-  
+  const query = buildQuery(params)
+  const res = await safeFetch(`${BASE_URL}/digimon?${query}`)
+  if (!res.ok) throw new Error("Failed to fetch Digimon list")
+
   const data = await res.json()
 
   if (!data.content && data.pageable?.totalElements === 0) {
@@ -55,42 +66,42 @@ export const getDigimonList = async (params = {}) => {
   }
 
   return data
-};
+}
 
-// Get Single Digimon
+/*Get Single Digimon*/
 export const getDigimon = async (idOrName) => {
-  if (!idOrName) throw new Error("Digimon ID or name is required");
-  
-  const res = await fetch(`${BASE_URL}/digimon/${idOrName}`);
-  
-  if (res.status === 404) throw new Error(`Digimon "${idOrName}" not found`);
-  if (!res.ok) throw new Error(`Failed to fetch Digimon: ${idOrName} (status ${res.status})`);
-  
-  const data = await res.json();
+  if (!idOrName) throw new Error("Digimon ID or name is required")
+
+  const res = await safeFetch(`${BASE_URL}/digimon/${idOrName}`)
+
+  if (res.status === 404) throw new Error(`Digimon "${idOrName}" not found`)
+  if (!res.ok) throw new Error(`Failed to fetch Digimon: ${idOrName} (status ${res.status})`)
+
+  const data = await res.json()
 
   if (!data.id || !data.name) {
-    throw new Error(`Invalid Digimon data received for: ${idOrName}`);
+    throw new Error(`Invalid Digimon data received for: ${idOrName}`)
   }
 
-  return data;
-};
+  return data
+}
 
-// Get Random Digimon
+/*Get Random Digimon*/
 export const getRandomDigimon = async () => {
-  const randomId = Math.floor(Math.random() * 1488) + 1;
+  const randomId = Math.floor(Math.random() * 1488) + 1
   try {
-    return await getDigimon(randomId);
+    return await getDigimon(randomId)
   } catch (err) {
-    throw new Error(`Failed to fetch random Digimon (tried ID ${randomId}): ${err.message}`);
+    throw new Error(`Failed to fetch random Digimon (tried ID ${randomId}): ${err.message}`)
   }
-};
+}
 
-// Get Attribute List
+/*Get Attribute List*/
 export const getAttributeList = async () => {
-  return fetchAllPages("attribute");
-};
+  return fetchAllPages("attribute")
+}
 
-// Get Level List
+/*Get Level List*/
 export const getLevelList = async () => {
-  return fetchAllPages("level");
-};
+  return fetchAllPages("level")
+}

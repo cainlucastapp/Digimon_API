@@ -4,6 +4,7 @@ import { useCallback } from "react"
 import useFetch from "../hooks/useFetch"
 import { getRandomDigimon } from "../services/digimonApi"
 import DigimonCard from "../components/DigimonCard"
+import ErrorMessage from "../components/ErrorMessage"
 import "../styles/Hero.css"
 
 function Hero() {
@@ -11,7 +12,7 @@ function Hero() {
   const { data, loading, error } = useFetch(fetchRandom, [])
 
   if (loading) return <div className="hero-loading">Loading...</div>
-  if (error) return <div className="hero-error">Error: {error}</div>
+  if (error) return <ErrorMessage message={error} />
 
   return (
     <div className="hero">
