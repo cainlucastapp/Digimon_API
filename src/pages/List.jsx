@@ -1,7 +1,7 @@
 // src/pages/List.jsx
 
 import { useState, useCallback } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import useFetch from "../hooks/useFetch"
 import { getDigimonList } from "../services/digimonApi"
 import DigimonCard from "../components/DigimonCard"
@@ -9,34 +9,35 @@ import FilterBar from "../components/FilterBar"
 import "../styles/List.css"
 
 function List() {
-  const { page: pageParam } = useParams()
-  const navigate = useNavigate()
-  const page = parseInt(pageParam || "1", 10)
-  const apiPage = page - 1
-
-  const [filters, setFilters] = useState({})
+  const [searchParams, setSearchParams] = useSearchParams()
   const [filterOpen, setFilterOpen] = useState(false)
 
+  const page = parseInt(searchParams.get("page") || "0")
+  const attribute = searchParams.get("attribute") || ""
+  const level = searchParams.get("level") || ""
+
   const fetchList = useCallback(
-    () => getDigimonList({ ...filters, page: apiPage, pageSize: 18 }),
-    [filters, page]
+    () => getDigimonList({ page, pageSize: 18, attribute, level }),
+    [page, attribute, level]
   )
-  const { data, loading, error } = useFetch(fetchList, [filters, page])
+  const { data, loading, error } = useFetch(fetchList, [page, attribute, level])
 
   const handleFilterChange = (newFilters) => {
-    setFilters(newFilters)
+    setSearchParams({
+      page: 0,
+      ...(newFilters.attribute && { attribute: newFilters.attribute }),
+      ...(newFilters.level && { level: newFilters.level }),
+    })
     setFilterOpen(false)
-    navigate(`/digimon/page/1`, { replace: true })
-    window.scrollTo(0, 0)
   }
 
   const handlePrev = () => {
-    navigate(`/digimon/page/${page - 1}`)
+    setSearchParams({ page: page - 1, attribute, level })
     window.scrollTo(0, 0)
   }
 
   const handleNext = () => {
-    navigate(`/digimon/page/${page + 1}`)
+    setSearchParams({ page: page + 1, attribute, level })
     window.scrollTo(0, 0)
   }
 
@@ -65,9 +66,9 @@ function List() {
       </div>
 
       <div className="list-pagination">
-        <button disabled={page === 1} onClick={handlePrev}>Prev</button>
-        <span>{page} / {data?.pageable.totalPages}</span>
-        <button disabled={page === data?.pageable.totalPages} onClick={handleNext}>Next</button>
+        <button disabled={page === 0} onClick={handlePrev}>Prev</button>
+        <span>{page + 1} / {data?.pageable.totalPages}</span>
+        <button disabled={page + 1 === data?.pageable.totalPages} onClick={handleNext}>Next</button>
       </div>
     </div>
   )
