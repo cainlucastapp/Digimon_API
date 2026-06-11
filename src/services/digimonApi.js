@@ -44,13 +44,17 @@ export const getDigimonList = async (params = {}) => {
   const res = await fetch(`${BASE_URL}/digimon?${query}`);
   if (!res.ok) throw new Error("Failed to fetch Digimon list");
   
-  const data = await res.json();
+  const data = await res.json()
 
-  if (!Array.isArray(data.content)) {
-    throw new Error("Unexpected response: Digimon list missing content array");
+  if (!data.content && data.pageable?.totalElements === 0) {
+    return { content: [], pageable: data.pageable }
   }
 
-  return data;
+  if (!Array.isArray(data.content)) {
+    throw new Error("Unexpected response: Digimon list missing content array")
+  }
+
+  return data
 };
 
 // Get Single Digimon
