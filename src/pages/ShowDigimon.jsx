@@ -7,6 +7,7 @@ import { getDigimon } from "../services/digimonApi"
 import DigimonCard from "../components/DigimonCard"
 import DigimonDetails from "../components/DigimonDetails"
 import DigimonSkills from "../components/DigimonSkills"
+import ErrorMessage from "../components/ErrorMessage"
 import EvolutionChain from "../components/EvolutionChain"
 import "../styles/ShowDigimon.css"
 
@@ -16,7 +17,7 @@ function ShowDigimon() {
   const { data, loading, error } = useFetch(fetchDigimon, [id])
 
   if (loading) return <div className="show-loading">Loading...</div>
-  if (error) return <div className="show-error">Error: {error}</div>
+  if (error) return <ErrorMessage message={error} />
 
   return (
     <div className="show">

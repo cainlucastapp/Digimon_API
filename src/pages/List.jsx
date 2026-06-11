@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom"
 import useFetch from "../hooks/useFetch"
 import { getDigimonList } from "../services/digimonApi"
 import DigimonCard from "../components/DigimonCard"
+import ErrorMessage from "../components/ErrorMessage"
 import FilterBar from "../components/FilterBar"
 import SearchBar from "../components/SearchBar"
 import "../styles/List.css"
@@ -64,7 +65,7 @@ function List() {
 
   // Loading and Error States
   if (loading) return <div>Loading...</div>
-  if (error) return <div>Error: {error}</div>
+  if (error) return <ErrorMessage message={error} />
 
   return (
     <div className="list">
