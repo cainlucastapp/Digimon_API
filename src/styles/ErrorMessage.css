@@ -1,0 +1,47 @@
+/*src/styles/ErrorMessage.css*/
+
+/*Base*/
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  text-align: center;
+  min-height: 300px;
+}
+
+/*Title*/
+.error-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent-yellow);
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-md);
+}
+
+/*Message*/
+.error-message {
+  font-family: var(--font-body);
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+/*Button*/
+.error-btn {
+  background-color: transparent;
+  border: 2px solid var(--color-accent-blue);
+  color: var(--color-accent-blue);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 8px 24px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.error-btn:hover {
+  background-color: var(--color-accent-blue);
+  color: var(--color-bg-primary);
+}
