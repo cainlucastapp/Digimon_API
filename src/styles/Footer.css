@@ -1,0 +1,17 @@
+/*src/styles/Footer.css*/
+
+/*Base*/
+.footer {
+  background-color: var(--color-bg-secondary);
+  border-top: 2px solid var(--color-accent-blue);
+  padding: var(--spacing-md) var(--spacing-lg);
+  text-align: center;
+  margin-top: var(--spacing-lg);
+}
+
+/*Disclaimer*/
+.footer-disclaimer {
+  font-family: var(--font-body);
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+}
