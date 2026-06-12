@@ -5,13 +5,17 @@ import useFetch from "../hooks/useFetch"
 import { getRandomDigimon } from "../services/digimonApi"
 import DigimonCard from "../components/DigimonCard"
 import ErrorMessage from "../components/ErrorMessage"
+import Spinner from "../components/Spinner"
 import "../styles/Hero.css"
 
 function Hero() {
   const fetchRandom = useCallback(() => getRandomDigimon(), [])
   const { data, loading, error } = useFetch(fetchRandom, [])
 
-  if (loading) return <div className="hero-loading">Loading...</div>
+  // Loading State
+  if (loading) return <Spinner />
+
+  //Error State
   if (error) return <ErrorMessage message={error} />
 
   return (

@@ -9,6 +9,7 @@ import DigimonDetails from "../components/DigimonDetails"
 import DigimonSkills from "../components/DigimonSkills"
 import ErrorMessage from "../components/ErrorMessage"
 import EvolutionChain from "../components/EvolutionChain"
+import Spinner from "../components/Spinner"
 import "../styles/ShowDigimon.css"
 
 function ShowDigimon() {
@@ -16,7 +17,10 @@ function ShowDigimon() {
   const fetchDigimon = useCallback(() => getDigimon(id), [id])
   const { data, loading, error } = useFetch(fetchDigimon, [id])
 
-  if (loading) return <div className="show-loading">Loading...</div>
+  // Loading State
+  if (loading) return <Spinner />
+
+  //Error State
   if (error) return <ErrorMessage message={error} />
 
   return (
