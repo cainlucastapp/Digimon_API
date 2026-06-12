@@ -1,6 +1,7 @@
 // src/App.jsx
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import Footer from "./components/Footer"
 import Navbar from "./components/Navbar"
 import Hero from "./pages/Hero"
 import List from "./pages/List"
@@ -16,6 +17,7 @@ function App() {
         <Route path="/digimon/page/:page" element={<List />} />
         <Route path="/digimon/:id" element={<ShowDigimon />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
