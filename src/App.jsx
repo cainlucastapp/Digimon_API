@@ -5,6 +5,7 @@ import Footer from "./components/Footer"
 import Navbar from "./components/Navbar"
 import Hero from "./pages/Hero"
 import List from "./pages/List"
+import NotFound from "./pages/NotFound"
 import ShowDigimon from "./pages/ShowDigimon"
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/digimon" element={<Navigate to="/digimon/page/1" replace />} />
         <Route path="/digimon/page/:page" element={<List />} />
         <Route path="/digimon/:id" element={<ShowDigimon />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>
