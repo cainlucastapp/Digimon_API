@@ -15,3 +15,11 @@
   color: var(--color-text-secondary);
   font-size: 0.8rem;
 }
+
+/*Powered*/
+.footer-powered {
+  font-family: var(--font-body);
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  margin-bottom: var(--spacing-sm);
+}
