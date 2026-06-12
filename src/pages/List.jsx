@@ -8,6 +8,7 @@ import DigimonCard from "../components/DigimonCard"
 import ErrorMessage from "../components/ErrorMessage"
 import FilterBar from "../components/FilterBar"
 import SearchBar from "../components/SearchBar"
+import Spinner from "../components/Spinner"
 import "../styles/List.css"
 
 function List() {
@@ -63,8 +64,10 @@ function List() {
     window.scrollTo(0, 0)
   }
 
-  // Loading and Error States
-  if (loading) return <div>Loading...</div>
+  // Loading State
+  if (loading) return <Spinner />
+
+  //Error State
   if (error) return <ErrorMessage message={error} />
 
   return (
