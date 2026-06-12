@@ -14,8 +14,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Hero />} />
-        <Route path="/digimon" element={<Navigate to="/digimon/page/1" replace />} />
-        <Route path="/digimon/page/:page" element={<List />} />
+        <Route path="/digimon" element={<List />} />
         <Route path="/digimon/:id" element={<ShowDigimon />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
