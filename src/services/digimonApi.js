@@ -2,7 +2,7 @@
 
 const BASE_URL = "https://digi-api.com/api/v1"
 
-/*Build Query*/
+// Build Query
 const buildQuery = (params) => {
   const query = new URLSearchParams()
   Object.entries(params).forEach(([key, value]) => {
@@ -13,7 +13,7 @@ const buildQuery = (params) => {
   return query.toString()
 }
 
-/*Safe Fetch*/
+// Safe Fetch
 const safeFetch = async (url) => {
   let res
   try {
@@ -24,7 +24,7 @@ const safeFetch = async (url) => {
   return res
 }
 
-/*Fetch All Pages*/
+// Fetch All Pages
 const fetchAllPages = async (endpoint) => {
   let page = 0
   let allFields = []
@@ -49,7 +49,7 @@ const fetchAllPages = async (endpoint) => {
   return allFields
 }
 
-/*Get Digimon List*/
+// Get Digimon List
 export const getDigimonList = async (params = {}) => {
   const query = buildQuery(params)
   const res = await safeFetch(`${BASE_URL}/digimon?${query}`)
@@ -61,6 +61,11 @@ export const getDigimonList = async (params = {}) => {
     return { content: [], pageable: data.pageable }
   }
 
+  // Handle out of range page
+  if (!data.content && data.pageable?.totalPages > 0) {
+    return { content: [], pageable: data.pageable }
+  }
+
   if (!Array.isArray(data.content)) {
     throw new Error("Unexpected response: Digimon list missing content array")
   }
@@ -68,7 +73,7 @@ export const getDigimonList = async (params = {}) => {
   return data
 }
 
-/*Get Single Digimon*/
+// Get Single Digimon
 export const getDigimon = async (idOrName) => {
   if (!idOrName) throw new Error("Digimon ID or name is required")
 
@@ -86,7 +91,7 @@ export const getDigimon = async (idOrName) => {
   return data
 }
 
-/*Get Random Digimon*/
+// Get Random Digimon
 export const getRandomDigimon = async () => {
   const randomId = Math.floor(Math.random() * 1488) + 1
   try {
@@ -96,12 +101,12 @@ export const getRandomDigimon = async () => {
   }
 }
 
-/*Get Attribute List*/
+// Get Attribute List
 export const getAttributeList = async () => {
   return fetchAllPages("attribute")
 }
 
-/*Get Level List*/
+// Get Level List
 export const getLevelList = async () => {
   return fetchAllPages("level")
 }
