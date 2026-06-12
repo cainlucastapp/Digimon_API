@@ -2,10 +2,6 @@ TODO
 
 
 
-Replace hero Lorem ipsum
-
-
-
 *Extras
 Battler
 Testing Suite

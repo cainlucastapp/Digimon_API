@@ -23,7 +23,9 @@ function Hero() {
       <div className="hero-text">
         <h1 className="hero-title">Welcome to Digi Fight</h1>
         <p className="hero-body">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sapien eget nunc efficitur commodo. Sed at ligula a enim efficitur tincidunt. Curabitur ac odio id nisl convallis fermentum. 
+          Explore a database of over 1,400 Digimon then send them into intense one-on-one battles to prove their strength.
+
+          Watch your Digimon grow through victory, unlock new evolutions, and discover how each form changes the course of battle. 
         </p>
         <a href="/digimon" className="hero-btn">Browse All Digimon</a>
       </div>
