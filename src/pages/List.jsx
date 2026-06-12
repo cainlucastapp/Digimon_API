@@ -20,10 +20,19 @@ function List() {
   const [filterOpen, setFilterOpen] = useState(false)
 
   // Read Params from URL
-  const page = parseInt(searchParams.get("page") || "0")
+  const pageParam = parseInt(searchParams.get("page") || "1")
+  const page = pageParam - 1 // convert to 0-based for API
   const attribute = searchParams.get("attribute") || ""
   const level = searchParams.get("level") || ""
   const name = searchParams.get("name") || ""
+
+  // Build Clean Params
+  const buildParams = (newPage, newAttribute, newLevel, newName) => ({
+    page: newPage + 1, // convert back to 1-based for URL
+    ...(newAttribute && { attribute: newAttribute }),
+    ...(newLevel && { level: newLevel }),
+    ...(newName && { name: newName }),
+  })
 
   // Fetch Digimon List
   const fetchList = useCallback(
@@ -34,40 +43,36 @@ function List() {
 
   // Handle Search Submit
   const handleSearch = (value) => {
-    setSearchParams({
-      page: 0,
-      ...(value && { name: value }),
-      ...(attribute && { attribute }),
-      ...(level && { level }),
-    })
+    setSearchParams(buildParams(0, attribute, level, value))
   }
 
   // Handle Filter Change
   const handleFilterChange = (newFilters) => {
-    setSearchParams({
-      page: 0,
-      ...(name && { name }),
-      ...(newFilters.attribute && { attribute: newFilters.attribute }),
-      ...(newFilters.level && { level: newFilters.level }),
-    })
+    setSearchParams(buildParams(0, newFilters.attribute, newFilters.level, name))
     setFilterOpen(false)
   }
 
   // Handle Pagination
   const handlePrev = () => {
-    setSearchParams({ page: page - 1, attribute, level, name })
+    setSearchParams(buildParams(page - 1, attribute, level, name))
     window.scrollTo(0, 0)
   }
 
   const handleNext = () => {
-    setSearchParams({ page: page + 1, attribute, level, name })
+    setSearchParams(buildParams(page + 1, attribute, level, name))
     window.scrollTo(0, 0)
+  }
+
+  // Redirect to last page if out of range
+  if (data && pageParam > data.pageable.totalPages) {
+    setSearchParams(buildParams(data.pageable.totalPages - 1, attribute, level, name))
+    return null
   }
 
   // Loading State
   if (loading) return <Spinner />
 
-  //Error State
+  // Error State
   if (error) return <ErrorMessage message={error} />
 
   return (
@@ -98,11 +103,11 @@ function List() {
 
       {data?.pageable.totalElements > 0 && (
         <div className="list-pagination">
-          <button disabled={page === 0} onClick={handlePrev}>Prev</button>
-          <span>{page + 1} / {data?.pageable.totalPages}</span>
-          <button disabled={page + 1 >= data?.pageable.totalPages} onClick={handleNext}>Next</button>
+          <button disabled={pageParam === 1} onClick={handlePrev}>Prev</button>
+          <span>{pageParam} / {data?.pageable.totalPages}</span>
+          <button disabled={pageParam >= data?.pageable.totalPages} onClick={handleNext}>Next</button>
         </div>
-      )} 
+      )}
 
     </div>
   )
