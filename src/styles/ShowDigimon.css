@@ -5,6 +5,7 @@
   padding-top: 90px;
   padding-left: var(--spacing-lg);
   padding-right: var(--spacing-lg);
+  min-height: calc(100vh - 70px);
   max-width: 1200px;
   margin: 0 auto;
 }

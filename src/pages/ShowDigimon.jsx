@@ -3,6 +3,7 @@
 import { useParams } from "react-router-dom"
 import { useCallback } from "react"
 import useFetch from "../hooks/useFetch"
+import NotFound from "./NotFound"
 import { getDigimon } from "../services/digimonApi"
 import DigimonCard from "../components/DigimonCard"
 import DigimonDetails from "../components/DigimonDetails"
@@ -21,7 +22,10 @@ function ShowDigimon() {
   if (loading) return <Spinner />
 
   //Error State
-  if (error) return <ErrorMessage message={error} />
+  if (error) {
+    if (error.includes("not found") || error.includes("status 400") || error.includes("status 404")) return <NotFound />
+    return <ErrorMessage message={error} />
+  }
 
   return (
     <div className="show">

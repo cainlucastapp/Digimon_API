@@ -74,7 +74,7 @@ export const getDigimon = async (idOrName) => {
 
   const res = await safeFetch(`${BASE_URL}/digimon/${idOrName}`)
 
-  if (res.status === 404) throw new Error(`Digimon "${idOrName}" not found`)
+  if (res.status === 404 || res.status === 400) throw new Error(`Digimon "${idOrName}" not found`)
   if (!res.ok) throw new Error(`Failed to fetch Digimon: ${idOrName} (status ${res.status})`)
 
   const data = await res.json()
