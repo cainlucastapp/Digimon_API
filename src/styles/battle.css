@@ -1,0 +1,19 @@
+/*src/styles/Battle.css*/
+
+/*Base*/
+.battle {
+    padding-top: 90px;
+    min-height: calc(100vh - 70px);
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/*Mobile*/
+@media (max-width: 480px) {
+    .battle {
+        padding-left: var(--spacing-sm);
+        padding-right: var(--spacing-sm);
+    }
+}

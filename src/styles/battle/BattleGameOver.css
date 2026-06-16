@@ -1,0 +1,18 @@
+/*src/styles/battle/BattleGameOver.css*/
+
+/*Game Over Title*/
+.battle-title-gameover {
+    font-family: var(--font-heading);
+    color: var(--color-accent-blue);
+    text-shadow: var(--border-glow);
+    text-transform: uppercase;
+    font-size: clamp(2rem, 5vw, 3rem);
+    text-align: center;
+}
+
+/*Mobile*/
+@media (max-width: 480px) {
+    .battle-title-gameover {
+        font-size: 2rem;
+    }
+}

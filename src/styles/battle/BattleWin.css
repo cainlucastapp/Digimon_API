@@ -1,0 +1,46 @@
+/*src/styles/battle/BattleWin.css*/
+
+/*Actions*/
+.battle-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/*Win Message*/
+.battle-win-message {
+    font-family: var(--font-body);
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    text-align: center;
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-accent-blue);
+    border-radius: var(--radius);
+    padding: var(--spacing-md);
+    max-width: 600px;
+    width: 100%;
+}
+
+/*Win Image*/
+.battle-win-img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 2px solid var(--color-accent-blue);
+    box-shadow: var(--border-glow);
+}
+
+/*Mobile*/
+@media (max-width: 480px) {
+    .battle-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .battle-actions .battle-btn {
+        width: 100%;
+    }
+}

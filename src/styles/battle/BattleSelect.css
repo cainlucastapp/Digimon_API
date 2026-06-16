@@ -1,0 +1,78 @@
+/*src/styles/battle/BattleSelect.css*/
+
+/*Choices*/
+.battle-choices {
+  display: flex;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/*Choice Card*/
+.battle-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-bg-card);
+  border: 2px solid var(--color-accent-blue);
+  box-shadow: var(--border-glow);
+  border-radius: 12px;
+  padding: var(--spacing-md);
+  width: 180px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  gap: var(--spacing-sm);
+}
+
+.battle-choice:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 16px #00d4ff, 0 0 4px #00d4ff;
+}
+
+/*Choice Image*/
+.battle-choice-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+/*Choice Name*/
+.battle-choice-name {
+  font-family: var(--font-heading);
+  color: var(--color-accent-yellow);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/*Choice HP*/
+.battle-choice-hp {
+  font-family: var(--font-body);
+  color: var(--color-accent-blue);
+  font-size: 0.8rem;
+}
+
+/*Choice Level*/
+.battle-choice-level {
+  font-family: var(--font-body);
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+}
+
+/*Mobile*/
+@media (max-width: 480px) {
+  .battle-choices {
+    gap: var(--spacing-md);
+  }
+
+  .battle-choice {
+    width: 140px;
+  }
+
+  .battle-choice-img {
+    width: 90px;
+    height: 90px;
+  }
+}
