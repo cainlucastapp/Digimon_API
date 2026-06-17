@@ -28,7 +28,8 @@ function Navbar() {
 
       <ul className={`navbar-links ${menuOpen ? "open" : ""}`}>
         <li><Link to="/" onClick={closeMenu}>Home</Link></li>
-        <li><Link to="/digimon?page=1" onClick={closeMenu}>Digimons</Link></li>
+        <li><Link to="/digimon?page=1" onClick={closeMenu}>Digimon</Link></li>
+        <li><Link to="/battle" onClick={closeMenu}>Battle</Link></li>
       </ul>
     </nav>
   )

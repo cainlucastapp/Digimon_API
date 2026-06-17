@@ -1,0 +1,66 @@
+/*src/styles/battle/BattleIntro.css*/
+
+/*Screen*/
+.battle-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: var(--spacing-lg);
+}
+
+/*Title*/
+.battle-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent-yellow);
+  text-transform: uppercase;
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+}
+
+/*Button*/
+.battle-btn {
+  background-color: transparent;
+  border: 2px solid var(--color-accent-blue);
+  color: var(--color-accent-blue);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 10px 32px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 1rem;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.battle-btn:hover {
+  background-color: var(--color-accent-blue);
+  color: var(--color-bg-primary);
+}
+
+/*Rules*/
+.battle-rules {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-accent-blue);
+  border-radius: var(--radius);
+  padding: var(--spacing-lg);
+  max-width: 600px;
+}
+
+.battle-rules p {
+  font-family: var(--font-body);
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/*Mobile*/
+@media (max-width: 480px) {
+  .battle-rules {
+    padding: var(--spacing-md);
+  }
+}
