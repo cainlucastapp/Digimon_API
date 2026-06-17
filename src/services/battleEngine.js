@@ -1,5 +1,7 @@
 // src/services/battleEngine.js
 
+import { getDigimon, getDigimonList } from "./digimonApi"
+
 // Attribute Matchups
 const ATTRIBUTE_MATCHUPS = {
     "Vaccine": "Virus",
@@ -121,3 +123,72 @@ export const applyDamage = (currentHP, damage) => {
 
 // Is Fainted
 export const isFainted = (hp) => hp <= 0
+
+// Build Fighter from Digimon
+export const buildFighter = (digimon) => ({
+    digimon,
+    hp: calcHP(digimon),
+    maxHP: calcHP(digimon),
+    skills: getRandomSkills(digimon),
+})
+
+/*Evolve Fighter to Next Valid Level*/
+export const evolveFighter = async (fighter) => {
+    if (!fighter.digimon.nextEvolutions?.length) return null
+
+    const currentLevel = fighter.digimon.levels?.[0]?.level || "Baby I"
+    const nextLevel = getNextLevel(currentLevel)
+    if (!nextLevel) return null
+
+    const evoDetails = await Promise.all(
+        fighter.digimon.nextEvolutions.map(evo => getDigimon(evo.id))
+    )
+
+    // Try direct evolution to next level
+    const directEvolutions = evoDetails.filter(evo =>
+        evo.levels?.[0]?.level === nextLevel
+    )
+
+    if (directEvolutions.length > 0) {
+        return directEvolutions[Math.floor(Math.random() * directEvolutions.length)]
+    }
+
+    // If stuck at Baby I with only Baby II evolution, chain to Child
+    if (currentLevel === "Baby I") {
+        const babyTwoOptions = evoDetails.filter(evo => evo.levels?.[0]?.level === "Baby II")
+        for (const babyTwo of babyTwoOptions) {
+            if (!babyTwo.nextEvolutions?.length) continue
+            const chainDetails = await Promise.all(
+                babyTwo.nextEvolutions.map(evo => getDigimon(evo.id))
+            )
+            const childOptions = chainDetails.filter(evo => evo.levels?.[0]?.level === "Child")
+            if (childOptions.length > 0) {
+                return childOptions[Math.floor(Math.random() * childOptions.length)]
+            }
+        }
+    }
+
+    return null
+}
+
+/*Execute Attack (shared by player and CPU)*/
+export const executeAttack = (attacker, defender, skill) => {
+    const defenderAttribute = getAttribute(defender.digimon)
+    const damage = calcDamage(attacker.digimon, attacker.maxHP, defenderAttribute)
+    const newHP = applyDamage(defender.hp, damage)
+    const message = `${attacker.digimon.name} used ${skill.skill} for ${damage} damage!`
+    const fainted = isFainted(newHP)
+
+    return { newHP, message, fainted }
+}
+
+/*Get Random Digimon by Level*/
+export const getRandomDigimonByLevel = async (level, count = 1) => {
+    const res = await getDigimonList({ level, pageSize: 100 })
+    const pool = res.content || []
+    if (pool.length === 0) return []
+
+    const shuffled = [...pool].sort(() => Math.random() - 0.5)
+    const selected = shuffled.slice(0, count)
+    return Promise.all(selected.map(d => getDigimon(d.id)))
+}
