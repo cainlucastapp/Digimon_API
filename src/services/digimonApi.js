@@ -15,13 +15,13 @@ const buildQuery = (params) => {
 
 // Safe Fetch
 const safeFetch = async (url) => {
-  let res
-  try {
-    res = await fetch(url)
-  } catch (err) {
-    throw new Error("Network error — please check your connection and try again")
-  }
-  return res
+    let res
+    try {
+        res = await fetch(url)
+    } catch (err) {
+        throw new Error("Network error — please check your connection and try again", { cause: err })
+    }
+    return res
 }
 
 // Fetch All Pages
@@ -93,12 +93,12 @@ export const getDigimon = async (idOrName) => {
 
 // Get Random Digimon
 export const getRandomDigimon = async () => {
-  const randomId = Math.floor(Math.random() * 1488) + 1
-  try {
-    return await getDigimon(randomId)
-  } catch (err) {
-    throw new Error(`Failed to fetch random Digimon (tried ID ${randomId}): ${err.message}`)
-  }
+    const randomId = Math.floor(Math.random() * 1488) + 1
+    try {
+        return await getDigimon(randomId)
+    } catch (err) {
+        throw new Error(`Failed to fetch random Digimon (tried ID ${randomId}): ${err.message}`, { cause: err })
+    }
 }
 
 // Get Attribute List

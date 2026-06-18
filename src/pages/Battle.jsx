@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react"
 import { useLocation } from "react-router-dom"
 
-import { calcHP, getAttribute, calcDamage, getPlayerLevel, getCPULevel, getRandomSkills, getNextLevel, applyDamage, isFainted, buildFighter, evolveFighter, executeAttack, getRandomDigimonByLevel } from "../services/battleEngine"
+import { getPlayerLevel, getCPULevel, buildFighter, evolveFighter, executeAttack, getRandomDigimonByLevel } from "../services/battleEngine"
 import BattleIntro from "../components/battle/BattleIntro"
 import BattleSelect from "../components/battle/BattleSelect"
 import BattleArena from "../components/battle/BattleArena"
@@ -43,13 +43,17 @@ function Battle() {
     // Reset on Navigation to battle
     const location = useLocation()
     useEffect(() => {
-        setScreen("start")
-        setRound(0)
-        setPlayer(defaultFighter)
-        setCpu(defaultFighter)
-        setLastMessage("")
-        setTurn("player")
-        setIsAnimating(false)
+        const reset = () => {
+            setScreen("start")
+            setRound(0)
+            setPlayer(defaultFighter)
+            setCpu(defaultFighter)
+            setLastMessage("")
+            setTurn("player")
+            setIsAnimating(false)
+            setIsFinalVictory(false)
+        }
+        reset()
     }, [location.pathname])
 
     // Load Player Choices
