@@ -19,7 +19,7 @@ function AppRoutes() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Hero />} />
-        <Route path="/digimon" element={<List />} />
+        <Route path="/digimon" element={<List key={location.key} />} />
         <Route path="/digimon/:id" element={<ShowDigimon />} />
         <Route path="/battle" element={<Battle key={location.key} />} />
         <Route path="*" element={<NotFound />} />
