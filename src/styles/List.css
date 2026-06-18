@@ -2,6 +2,7 @@
 
 /*Base*/
 .list {
+  min-height: 100vh;
   padding-top: 90px;
   padding-left: var(--spacing-lg);
   padding-right: var(--spacing-lg);
