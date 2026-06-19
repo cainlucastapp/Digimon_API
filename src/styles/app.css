@@ -28,11 +28,16 @@
 }
 
 /*Base*/
+/*Base*/
+html {
+    font-size: 20px;
+}
+
 body {
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  font-family: var(--font-body);
-  min-height: 100vh;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    min-height: 100vh;
 }
 
 h1, h2, h3, h4 {
