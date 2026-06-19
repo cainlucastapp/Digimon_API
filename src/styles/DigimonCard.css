@@ -97,6 +97,18 @@
     animation: scan-move 1.5s ease-in-out infinite;
 }
 
+.card-image-scan-line-1 {
+    animation-delay: 0s;
+}
+
+.card-image-scan-line-2 {
+    animation-delay: 0.3s;
+}
+
+.card-image-scan-line-3 {
+    animation-delay: 0.6s;
+}
+
 @keyframes scan-move {
     0% {
         top: 0;
