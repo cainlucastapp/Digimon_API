@@ -34,7 +34,7 @@ The app was built with React, React Router, and a custom service layer for handl
    ```
    npm run dev
    ```
-4. Open the app in your browser at the local address shown in the terminal (`http://localhost:5173`).
+4. Open the app in your browser at the local address shown in the terminal (`http://localhost:5555`).
 
 No API key or environment variables are required, as the Digi-API is fully public.
 
